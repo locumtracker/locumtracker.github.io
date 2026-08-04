@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr NurulHusna's Locum Ledger</title>
+<title>Dr Nurulhusna's Locum Ledger</title>
 <style>
   :root{
     --font-display: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
@@ -422,7 +422,7 @@
   <header class="masthead">
     <div>
       <div class="brand-mark">LocumTracker</div>
-      <h1>Dr NurulHusna's Locum Ledger</h1>
+      <h1>Dr Nurulhusna's Locum Ledger</h1>
       <div class="sub">Shift &amp; payment tracker &middot; private &amp; offline &middot; as of <b id="synced-date"></b></div>
     </div>
     <div class="header-actions">
@@ -598,10 +598,15 @@
 (function(){
   "use strict";
 
-  var ENTRIES_KEY = 'locumLedgerEntries_v2';
-  var ICS_KEY = 'locumLedgerIcsUids_v1';
-  var THRESH_KEY = 'locumLedgerThreshold_v1';
-  var THEME_KEY = 'locumLedgerTheme_v1';
+  // Storage is scoped to THIS page's own filename, not just the domain.
+  // Without this, every file hosted under the same GitHub Pages domain would
+  // read/write the exact same browser storage bucket, mixing one buyer's
+  // shifts into another's page if the same browser ever opened more than one.
+  var PAGE_NAMESPACE = ':' + location.pathname;
+  var ENTRIES_KEY = 'locumLedgerEntries_v2' + PAGE_NAMESPACE;
+  var ICS_KEY = 'locumLedgerIcsUids_v1' + PAGE_NAMESPACE;
+  var THRESH_KEY = 'locumLedgerThreshold_v1' + PAGE_NAMESPACE;
+  var THEME_KEY = 'locumLedgerTheme_v1' + PAGE_NAMESPACE;
 
   function $(id){ return document.getElementById(id); }
 
